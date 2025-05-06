@@ -1,0 +1,31 @@
+.subckt opamp3 v+ v- out
+
+;stage1
+.param Rwer=1Meg
+.param gm1=5m
+.param R1wew=15k
+.param C1wew=100p
+;stage2
+.param gm2=40m
+.param R2wew=32k
+.param C2wew=5p
+;stage3
+.param Rwy=100
+.param Cwy=160p
+
+;input
+Rid v+ v- {Rwer}
+;stage1
+Gs1 4 0 v+ v- {gm1}
+R1 4 0 {R1wew}
+C1 4 0 {C1wew}
+;stage2
+Gs2 5 0 4 0 {gm2}
+R2 5 0 {R2wew}
+C2 5 0 {C2wew}
+;output (stage3)
+E1 6 0 5 0 1
+Ro 6 out {Rwy}
+Co out 0 {Cwy}
+
+.ends opamp3
